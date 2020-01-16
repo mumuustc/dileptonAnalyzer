@@ -1,0 +1,5 @@
+1) compile code: ./compileCode.sh
+2) run test: ./run_test.sh
+3) submit job to cluster to skim data: submit.sh
+
+file catalog example to find STAR data: getfilelist_example.sh
