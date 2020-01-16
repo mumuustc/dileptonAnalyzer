@@ -1,4 +1,4 @@
-1) compile code: ./compileCode.sh
+1) compile code: source compileCode.sh
 2) run test: ./run_test.sh
 3) submit job to cluster to skim data: submit.sh
 
