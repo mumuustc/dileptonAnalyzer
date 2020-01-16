@@ -133,6 +133,7 @@ class StMiniTreeMaker : public StMaker {
 		TH1D           *hChargePt;
 		TH2D           *hdEdxvsP;
 		TH2D           *hnSigEvsP;
+		TH2D           *hnSigEvsP_wBetaCut;
 		TH2D           *hBetavsP;
 
 		ClassDef(StMiniTreeMaker, 1)

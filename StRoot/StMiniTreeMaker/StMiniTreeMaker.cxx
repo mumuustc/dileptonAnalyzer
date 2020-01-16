@@ -3,8 +3,8 @@
 
 ClassImp(StMiniTreeMaker)
 
-	//_____________________________________________________________________________
-	StMiniTreeMaker::StMiniTreeMaker(const Char_t *name) : StMaker(name), mFillTree(1), mFillHisto(1), mPrintConfig(1), mPrintMemory(0), mPrintCpu(0), fOutFile(0), mOutFileName(""), mEvtTree(0), mMaxVtxR(1.e4), mMaxVtxZ(1.e4), mMaxVzDiff(1.e4), mMinTrkPt(0.2), mMaxTrkEta(1.), mMinNHitsFit(15), mMinNHitsFitRatio(0.52), mMinNHitsDedx(10), mMaxDca(10.), mMaxnSigmaE(3), mMaxBeta2TOF(0.03)
+//_____________________________________________________________________________
+StMiniTreeMaker::StMiniTreeMaker(const Char_t *name) : StMaker(name), mFillTree(1), mFillHisto(1), mPrintConfig(1), mPrintMemory(0), mPrintCpu(0), fOutFile(0), mOutFileName(""), mEvtTree(0), mMaxVtxR(1.e4), mMaxVtxZ(1.e4), mMaxVzDiff(1.e4), mMinTrkPt(0.2), mMaxTrkEta(1.), mMinNHitsFit(15), mMinNHitsFitRatio(0.52), mMinNHitsDedx(10), mMaxDca(10.), mMaxnSigmaE(3), mMaxBeta2TOF(0.03)
 {
 	// default constructor
 
@@ -253,7 +253,12 @@ Bool_t StMiniTreeMaker::processPicoEvent()
 			mEvtData.mTOFLocalY[nTrks]    = btofPidTraits->btofYLocal();
 			mEvtData.mBeta2TOF[nTrks]     = btofPidTraits->btofBeta();
 
-			if(mFillHisto) hBetavsP->Fill(pMom.Mag(), 1./mEvtData.mBeta2TOF[nTrks]);
+			if(mFillHisto){
+				hBetavsP->Fill(pMom.Mag(), 1./mEvtData.mBeta2TOF[nTrks]);
+				if(mEvtData.mBeta2TOF[nTrks]>0 && TMath::Abs(1.-1./mEvtData.mBeta2TOF[nTrks])<=0.025){
+					hnSigEvsP_wBetaCut->Fill(pMom.Mag(), mEvtData.mNSigmaE[nTrks]);
+				}
+			}
 		}
 
 		if(
@@ -510,6 +515,7 @@ void StMiniTreeMaker::bookHistos()
 	hChargePt = new TH1D("hChargePt", "hChargePt; charge*p_{T} (GeV/c)", 600, -15, 15);
 	hdEdxvsP = new TH2D("hdEdxvsP","hdEdxvsP; p (GeV/c); dE/dx (KeV/cm)",300,0,15,400,0,20);
 	hnSigEvsP = new TH2D("hnSigEvsP","hnSigEvsP; p (GeV/c); n#sigma_{e}",300,0,15,700,-15,20);
+	hnSigEvsP_wBetaCut = new TH2D("hnSigEvsP_wBetaCut","hnSigEvsP_wBetaCut; p (GeV/c); n#sigma_{e}",300,0,15,700,-15,20);
 	hBetavsP = new TH2D("hBetavsP","hBetavsP; p (GeV/c); 1/#beta",300,0,15,800,0,4);
 }
 //_____________________________________________________________________________

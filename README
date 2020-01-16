@@ -1,5 +1,6 @@
-1) compile code: source compileCode.sh
-2) run test: ./run_test.sh
-3) submit job to cluster to skim data: submit.sh
+1) set STAR library to be SL19b using "starver SL19b" or directly put "starver SL19b" into ~/.cshrc for setting SL19b to be the default one
+2) compile code: source compileCode.sh
+3) run test: ./run_test.sh
+4) submit job to cluster to skim data: submit.sh
 
 file catalog example to find STAR data: getfilelist_example.sh

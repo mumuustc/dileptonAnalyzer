@@ -2,7 +2,7 @@
 <!--
 <job maxEvents="40000" softLimits="true" fileListSyntax="xrootd" simulateSubmission ="false">
 -->
-<job maxFilesPerProcess="100" fileListSyntax="paths" simulateSubmission ="false">
+<job maxFilesPerProcess="10" fileListSyntax="paths" simulateSubmission ="false">
 
 	<command>
 

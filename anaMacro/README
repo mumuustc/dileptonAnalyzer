@@ -1,0 +1,5 @@
+1)  use "source compileCode.sh" to compile the code
+2)  run test: ./analysis 
+3)  submit job to cluster:
+    a) root -l -b -q split.C to generate file list for each job
+	b) ./submitJob.sh
