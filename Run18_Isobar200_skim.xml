@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+<job maxEvents="40000" softLimits="true" fileListSyntax="xrootd" simulateSubmission ="false">
+-->
+<job maxFilesPerProcess="100" fileListSyntax="paths" simulateSubmission ="false">
+
+	<command>
+
+		ln -s &dir;/.sl73_gcc485 ./
+		ln -s &dir;/StRoot ./
+		ln -s &dir;/doEvent.C ./
+
+		starver SL19b
+		root4star -q -b ./doEvent.C\(-1,\"$FILELIST\",\"$SCRATCH/st_physics_${JOBID}.root\",0\)
+
+	 </command>
+
+		<stdout URL="file:&dir;/submitjob/submitErrInfo/$JOBID.out"/>
+		<stderr URL="file:&dir;/submitjob/submitErrInfo/$JOBID.err"/>
+        <Generator>
+			   <ReportLocation>./submitReport</ReportLocation>
+			   <ScriptLocation>./submitScript</ScriptLocation>
+			   <ListLocation>./submitList</ListLocation>
+	    </Generator> 
+
+		<!--
+  	    <input URL="file:/gpfs/mnt/gpfs01/star/i_bnl/syang/physics/run12/uu/makeTree/muDst/st_physics_13122049_raw_2030001.MuDst.root" /> 
+  	    <input URL="filelist:&dir;/picoDataList/subPicoDst.list"/> 
+  	    <input URL="filelist:&dir;/test.list"/> 
+  	    <input URL="filelist:&dir;/picoDataList/sublist/&list;"/> 
+		<input URL="catalog:star.bnl.gov?storage=nfs,production=P18ic,trgsetupname=AuAu54_production_2017,filetype=daq_reco_picoDst,filename~st_physics" nFiles="all" />
+  	    <input URL="filelist:&dir;/test.list"/> 
+  	    <input URL="filelist:&dir;/isobar.mixed.list"/> 
+		<output fromScratch="*.root" toURL="file:&dir;/submitjob/rootfiles_PicoDst/"/>
+		-->
+
+  	    <input URL="filelist:&dir;/isobar.mixed.list"/> 
+
+		<output fromScratch="*.root" toURL="file:&dir;/submitjob/rootfiles/"/>
+
+</job>
