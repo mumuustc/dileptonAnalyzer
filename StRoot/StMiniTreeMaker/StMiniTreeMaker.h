@@ -87,6 +87,8 @@ class StMiniTreeMaker : public StMaker {
 
 		StRefMultCorr *refMultCorr; //decide centrality
 
+		TClonesArray  *mEpdHits;
+
 		Bool_t         mPrintMemory;         // Flag to print out memory usage
 		Bool_t         mPrintCpu;            // Flag to print out CPU usage
 		Bool_t         mPrintConfig;         // Flag to print out task configuration

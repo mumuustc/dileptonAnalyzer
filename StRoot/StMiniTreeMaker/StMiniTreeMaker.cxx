@@ -34,6 +34,8 @@ Int_t StMiniTreeMaker::Init()
 	fOutFile = new TFile(mOutFileName.Data(),"recreate");
 	LOG_INFO << "StMiniTreeMaker:: create the output file to store the tree and histograms: " << mOutFileName.Data() << endm;
 
+	mEpdHits = new TClonesArray("StPicoEpdHit");
+
 	if(mFillTree)    bookTree();
 	if(mFillHisto)   bookHistos();
 
@@ -192,7 +194,6 @@ Bool_t StMiniTreeMaker::processPicoEvent()
 	//	hCentrality->Fill(mEvtData.mCentrality);
 	//}
 
-	TClonesArray *mEpdHits     = new TClonesArray("StPicoEpdHit");
 	TClonesArray &mEpdHits_ref = *mEpdHits;
 
 	mEpdHits_ref.Clear();
