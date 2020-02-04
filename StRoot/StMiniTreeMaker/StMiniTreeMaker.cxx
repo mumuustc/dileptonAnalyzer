@@ -192,6 +192,37 @@ Bool_t StMiniTreeMaker::processPicoEvent()
 	//	hCentrality->Fill(mEvtData.mCentrality);
 	//}
 
+	TClonesArray *mEpdHits     = new TClonesArray("StPicoEpdHit");
+	TClonesArray &mEpdHits_ref = *mEpdHits;
+
+	mEpdHits_ref.Clear();
+	for(Int_t iepd=0; iepd<mPicoDst->numberOfEpdHits(); iepd++){
+		StPicoEpdHit *epdHit = mPicoDst->epdHit(iepd);
+		Int_t   position = epdHit->position();
+		Int_t   tile     = epdHit->tile();
+		Int_t   EW       = epdHit->side();
+		Int_t   ADC      = epdHit->adc();
+		Int_t   TAC      = epdHit->tac();
+		Int_t   TDC      = epdHit->tdc();
+		Bool_t  hasTAC   = epdHit->hasTac();
+		Float_t nMIP     = epdHit->nMIP();
+		Bool_t  statusIsGood = epdHit->isGood();
+		new(mEpdHits_ref[iepd]) StPicoEpdHit(position, tile, EW, ADC, TAC, TDC, hasTAC, nMIP, statusIsGood);
+	}
+
+	//for(Int_t iepd=0; iepd<mEpdHits->GetEntries(); iepd++){
+	//	StPicoEpdHit *arrayEpd = mEpdHits->At(iepd);
+	//	StPicoEpdHit *picoEpd  = mPicoDst->epdHit(iepd);
+	//	cout<<"epdHitIdx: "<<iepd<<endl;
+	//	cout<<"position(Array): "<<arrayEpd->position()<<"    position(Pico): "<<picoEpd->position()<<endl;
+	//	cout<<"tile(Array):     "<<arrayEpd->tile()<<"        tile(Pico): "<<picoEpd->tile()<<endl;
+	//	cout<<"EW(Array):       "<<arrayEpd->side()<<"        EW(Pico): "<<picoEpd->side()<<endl;
+	//	cout<<"ADC(Array):      "<<arrayEpd->adc()<<"         ADC(Pico): "<<picoEpd->adc()<<endl;
+	//	cout<<"TAC(Array):      "<<arrayEpd->tac()<<"         TAC(Pico): "<<picoEpd->tac()<<endl;
+	//	cout<<"nMIP(Array):     "<<arrayEpd->nMIP()<<"        nMIP(Pico): "<<picoEpd->nMIP()<<endl;
+	//	cout<<endl;
+	//}
+
 	Int_t nNodes = mPicoDst->numberOfTracks();
 	if(Debug()){
 		LOG_INFO<<"# of global tracks in picoDst: "<<nNodes<<endm;

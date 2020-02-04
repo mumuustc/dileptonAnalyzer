@@ -87,11 +87,14 @@
 #include "StPicoEvent/StPicoDst.h"
 #include "StPicoEvent/StPicoEvent.h"
 #include "StPicoEvent/StPicoTrack.h"
+#include "StPicoEvent/StPicoEpdHit.h"
 #include "StPicoEvent/StPicoMtdHit.h"
 #include "StPicoEvent/StPicoMtdTrigger.h"
 #include "StPicoEvent/StPicoMtdPidTraits.h"
 #include "StPicoEvent/StPicoBTofPidTraits.h"
 #include "StPicoEvent/StPicoBEmcPidTraits.h"
+
+#include "StEpdUtil/StEpdEpFinder.h"
 
 #include "tables/St_mtdTriggerTimeCut_Table.h"
 #include "tables/St_mtdModuleToQTmap_Table.h"
